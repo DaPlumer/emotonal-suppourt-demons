@@ -102,7 +102,6 @@ public class EmotionalSuppourtDemon<T extends DemonEntity> extends SinglePartEnt
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
 		HandsomeBod.render(matrices, vertexConsumer, light, overlay);
 	}
-
 	@Override
 	public ModelPart getPart() {
 		return HandsomeBod;
