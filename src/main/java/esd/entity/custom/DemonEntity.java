@@ -78,6 +78,10 @@ public class DemonEntity extends AnimalEntity {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D);
     }
 
+    @Override
+    public boolean isDead() {
+        return false;
+    }
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {

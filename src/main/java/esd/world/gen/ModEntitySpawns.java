@@ -12,9 +12,13 @@ import net.minecraft.world.biome.BiomeKeys;
 
 public class ModEntitySpawns {
     public static void addEntitySpawns() {
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.NETHER_WASTES,BiomeKeys.WARPED_FOREST,BiomeKeys.CRIMSON_FOREST),
-                SpawnGroup.CREATURE, ModEntities.DEMON, 30, 5, 10);
-        SpawnRestriction.register(ModEntities.DEMON, SpawnLocationTypes.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::canMobSpawn);
+        BiomeModifications.addSpawn(BiomeSelectors.all(),
+                SpawnGroup.CREATURE, ModEntities.DEMON, 300, 1, 10);
+        SpawnRestriction.register(
+                ModEntities.DEMON,
+                SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                (type, world, spawnReason, pos, random) -> true
+        );
     }
 }
