@@ -75,7 +75,7 @@ public class DemonEntity extends AnimalEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 50.0D);
     }
 
     @Override
