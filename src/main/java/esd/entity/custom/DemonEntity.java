@@ -181,11 +181,7 @@ public class DemonEntity extends AnimalEntity implements Tameable{
 
     @Override
     protected void onPlayerSpawnedChild(PlayerEntity player, MobEntity child) {
-        //ItemStack stack = player.getStackInHand(player.getActiveHand());
-        //this.setCustomName(stack.getOrDefault(DataComponentTypes.ITEM_NAME, Text.translatable("entity.esd.emotional_suppourt_demon")));
-        //this.setCustomNameVisible(true);
-        //this.orientation = stack.getComponents().getOrDefault(DataTypes.ORENTATION, "");
-        //ownerUUID = player.getUuid();
+        ownerUUID = player.getUuid();
     }
     private UUID ownerUUID;
     @Override
