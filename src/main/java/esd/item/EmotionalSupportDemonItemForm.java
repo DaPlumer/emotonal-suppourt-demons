@@ -27,18 +27,12 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-import java.util.Objects;
 
 public class EmotionalSupportDemonItemForm extends SpawnEggItem {
     public EmotionalSupportDemonItemForm(EntityType<? extends MobEntity> type, int primaryColor, int secondaryColor, Settings settings) {
         super(type, primaryColor, secondaryColor, settings);
     }
 
-    @Override
-    public ItemStack getDefaultStack() {
-        ItemStack stack = super.getDefaultStack();
-        return stack;
-    }
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
         if (!(world instanceof ServerWorld)) {
@@ -49,7 +43,7 @@ public class EmotionalSupportDemonItemForm extends SpawnEggItem {
             Direction direction = context.getSide();
             BlockState blockState = world.getBlockState(blockPos);
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
-            if (blockEntity instanceof Spawner spawner) {;
+            if (blockEntity instanceof Spawner spawner) {
                 spawner.setEntityType(ModEntities.DEMON, world.getRandom());
                 world.updateListeners(blockPos, blockState, blockState, 3);
                 world.emitGameEvent(context.getPlayer(), GameEvent.BLOCK_CHANGE, blockPos);
