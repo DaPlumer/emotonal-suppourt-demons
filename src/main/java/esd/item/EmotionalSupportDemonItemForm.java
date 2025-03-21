@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.Spawner;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
@@ -48,7 +47,6 @@ public class EmotionalSupportDemonItemForm extends SpawnEggItem {
                 world.updateListeners(blockPos, blockState, blockState, 3);
                 world.emitGameEvent(context.getPlayer(), GameEvent.BLOCK_CHANGE, blockPos);
                 itemStack.decrement(1);
-                return ActionResult.CONSUME;
             } else {
                 BlockPos blockPos2;
                 if (blockState.getCollisionShape(world, blockPos).isEmpty()) {
@@ -61,8 +59,8 @@ public class EmotionalSupportDemonItemForm extends SpawnEggItem {
                     setupChildEntity(childEntity, context.getPlayer(), itemStack, (ServerWorld) world);
                 }
 
-                return ActionResult.CONSUME;
             }
+            return ActionResult.CONSUME;
         }
     }
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
