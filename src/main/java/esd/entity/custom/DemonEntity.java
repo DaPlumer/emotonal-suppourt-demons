@@ -31,8 +31,10 @@ public class DemonEntity extends AnimalEntity implements Tameable{
     public String askOrientation(){
         return this.orientation;
     }
-    public void setOrientation(String orientation){
-        this.orientation = orientation;
+    public void applyOrientation(String orientation){
+        if (this.orientation.equals("_")) {
+            this.orientation = orientation;
+        }
     }
 
     private int sitTicks = 0;
