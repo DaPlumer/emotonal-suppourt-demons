@@ -51,7 +51,7 @@ public class DemonEntity extends AnimalEntity implements Tameable{
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
 
         List<String> types = List.of(
-                "",
+                "_",
                 "gay_",
                 "gayer_",
                 "ace_",
@@ -130,22 +130,26 @@ public class DemonEntity extends AnimalEntity implements Tameable{
         return stack.isOf(Items.CAKE) && !Objects.equals(this.orientation, "ace_")&& !Objects.equals(this.orientation, "aero_");
     }
     private void updateSitTick(){
+        /*
+        A function run each tick to update the entities' sitting position.
+        When the sitTicks variable is equal to zero, the emotional support demon is either standing or walking.
+        Each tick there is a random chance to start the sitting animation by setting the sitTicks variable to 1.
+        the variable counts down each tick from 20 to 0 while playing the sit down animation.
+        When the sitTicks value hits 0, it becomes a random number between -128 and -256.
+        when sitTicks hits -20, it Starts the standing animation.
+         */
+
         if (random.nextInt(100) == 0 && sitTicks == 0 &! this.hasVehicle()) {
-
             this.sit.start(0);
-            this.sitTicks = 21;
-
-            if (sitTicks > 0) {
-                --sitTicks;
-            }
-
-            if (sitTicks == 1){
-                sitTicks = -(random.nextInt(100) + 50);
-            }
-            if (sitTicks < 0){
-                this.sit.start(0);
-                sitTicks++;
-            }
+            this.sitTicks = 20;
+        }
+        if (sitTicks > 0) {
+            sitTicks--;
+            if (sitTicks == 0) sitTicks = -(random.nextInt(128) + 128); //
+        }
+        if (sitTicks < 0){
+            sitTicks++;
+            if (sitTicks == -20) this.sit.start(0);
         }
     }
 
