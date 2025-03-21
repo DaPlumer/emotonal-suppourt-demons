@@ -61,7 +61,7 @@ public class EmotionalSuppourtDemon<T extends DemonEntity> extends SinglePartEnt
 
 
 		if(entity.getSitTicks() > 0){
-			this.updateAnimation(entity.sit,DemonAnimations.sit,21 - entity.getSitTicks());
+			this.updateAnimation(entity.sit,DemonAnimations.sit,20 - entity.getSitTicks());
 		}
 		if(entity.getSitTicks() < 0){
 			if(entity.getSitTicks() < -20){
