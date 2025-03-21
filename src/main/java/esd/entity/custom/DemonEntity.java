@@ -27,7 +27,14 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class DemonEntity extends AnimalEntity implements Tameable{
-    public String orientation;
+    protected String orientation;
+    public String askOrientation(){
+        return this.orientation;
+    }
+    public void setOrientation(String orientation){
+        this.orientation = orientation;
+    }
+
     private int sitTicks = 0;
     public int getSitTicks(){
         return this.sitTicks;
