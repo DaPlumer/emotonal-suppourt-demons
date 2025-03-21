@@ -50,32 +50,6 @@ public class EmotionalSuppourtDemon<T extends DemonEntity> extends SinglePartEnt
 		ModelPartData right_ear = HandsomeBod.addChild("right_ear", ModelPartBuilder.create(), ModelTransform.pivot(-4.0F, -5.0F, -4.0F));
 
 		ModelPartData cube_r4 = right_ear.addChild("cube_r4", ModelPartBuilder.create().uv(0, 3).mirrored().cuboid(0.0F, -3.0F, 0.0F, 4.0F, 3.0F, 0.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.of(0.0F, 0.0F, 0.0F, 3.1416F, -0.0873F, -2.8362F));
-
-		ModelPartData Cape = HandsomeBod.addChild("Cape", ModelPartBuilder.create().uv(7, 42).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -8.0F, 0.0F));
-
-		ModelPartData Cape_1 = Cape.addChild("Cape_1", ModelPartBuilder.create().uv(7, 41).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_2 = Cape_1.addChild("Cape_2", ModelPartBuilder.create().uv(7, 40).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_3 = Cape_2.addChild("Cape_3", ModelPartBuilder.create().uv(7, 39).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_4 = Cape_3.addChild("Cape_4", ModelPartBuilder.create().uv(7, 38).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_5 = Cape_4.addChild("Cape_5", ModelPartBuilder.create().uv(7, 37).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_6 = Cape_5.addChild("Cape_6", ModelPartBuilder.create().uv(7, 36).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_7 = Cape_6.addChild("Cape_7", ModelPartBuilder.create().uv(7, 35).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_8 = Cape_7.addChild("Cape_8", ModelPartBuilder.create().uv(7, 34).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_9 = Cape_8.addChild("Cape_9", ModelPartBuilder.create().uv(7, 33).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_10 = Cape_9.addChild("Cape_10", ModelPartBuilder.create().uv(7, 32).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_11 = Cape_10.addChild("Cape_11", ModelPartBuilder.create().uv(7, 31).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
-
-		ModelPartData Cape_12 = Cape_11.addChild("Cape_12", ModelPartBuilder.create().uv(7, 30).cuboid(-4.0F, 0.0F, 0.0F, 8.0F, 0.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 1.0F));
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 
