@@ -64,9 +64,7 @@ public class EmotionalSupportDemonItemForm extends SpawnEggItem {
                 }
                 DemonEntity childEntity = ModEntities.DEMON.spawn((ServerWorld) world,blockPos2,SpawnReason.SPAWN_EGG);
                 if (childEntity != null) {
-                    childEntity.orientation = itemStack.getOrDefault(DataTypes.ORENTATION, "");
-                    itemStack.decrement(1);
-                    world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
+                    setupChildEntity(childEntity, context.getPlayer(), itemStack, (ServerWorld) world);
                 }
 
                 return ActionResult.CONSUME;
@@ -89,15 +87,18 @@ public class EmotionalSupportDemonItemForm extends SpawnEggItem {
                 if (childEntity == null) {
                     return TypedActionResult.pass(itemStack);
                 } else {
-                    childEntity.orientation = itemStack.getOrDefault(DataTypes.ORENTATION, "");
-                    itemStack.decrementUnlessCreative(1, user);
+                    setupChildEntity(childEntity, user, itemStack, (ServerWorld) world);
                     user.incrementStat(Stats.USED.getOrCreateStat(this));
-                    world.emitGameEvent(user, GameEvent.ENTITY_PLACE, childEntity.getPos());
                     return TypedActionResult.consume(itemStack);
                 }
             } else {
                 return TypedActionResult.fail(itemStack);
             }
         }
+    }
+    private static void setupChildEntity(DemonEntity childEntity,PlayerEntity spawner,ItemStack stack, ServerWorld world) {
+        childEntity.applyOrientation(stack.getOrDefault(DataTypes.ORENTATION, "_"));
+        stack.decrementUnlessCreative(1, spawner);
+        world.emitGameEvent(spawner, GameEvent.ENTITY_PLACE, childEntity.getPos());
     }
 }
