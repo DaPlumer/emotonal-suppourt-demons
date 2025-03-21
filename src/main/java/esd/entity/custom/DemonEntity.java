@@ -38,7 +38,7 @@ public class DemonEntity extends AnimalEntity implements Tameable{
     public DemonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
-        this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0F);
+        
         List<String> types = List.of(
                 "",
                 "gay_",
