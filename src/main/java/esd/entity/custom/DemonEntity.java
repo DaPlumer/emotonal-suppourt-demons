@@ -136,7 +136,7 @@ public class DemonEntity extends AnimalEntity implements Tameable{
             }
 
             if (sitTicks == 1){
-                sitTicks = -random.nextInt(100) - 50;
+                sitTicks = -(random.nextInt(100) + 50);
             }
             if (sitTicks < 0){
                 this.sit.start(0);
