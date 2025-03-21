@@ -29,8 +29,8 @@ import net.minecraft.world.event.GameEvent;
 
 import java.util.Objects;
 
-public class ShamelessPromotion extends SpawnEggItem {
-    public ShamelessPromotion(EntityType<? extends MobEntity> type, int primaryColor, int secondaryColor, Settings settings) {
+public class EmotionalSupportDemonItemForm extends SpawnEggItem {
+    public EmotionalSupportDemonItemForm(EntityType<? extends MobEntity> type, int primaryColor, int secondaryColor, Settings settings) {
         super(type, primaryColor, secondaryColor, settings);
     }
 
