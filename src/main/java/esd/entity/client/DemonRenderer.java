@@ -15,7 +15,7 @@ public class DemonRenderer extends MobEntityRenderer<DemonEntity, EmotionalSuppo
 
     @Override
     public Identifier getTexture(DemonEntity entity) {
-        return Identifier.of(EmotionalSuppourtDemons.MOD_ID, "textures/entity/demon/"+entity.getOrientation()+"esd.png");
+        return Identifier.of(EmotionalSuppourtDemons.MOD_ID, "textures/entity/demon/"+entity.orientation+"esd.png");
     }
 
     @Override

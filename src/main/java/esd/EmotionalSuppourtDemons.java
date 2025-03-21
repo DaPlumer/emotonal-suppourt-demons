@@ -2,6 +2,7 @@ package esd;
 
 import esd.entity.ModEntities;
 import esd.entity.custom.DemonEntity;
+import esd.item.DataTypes;
 import esd.item.ModItems;
 import esd.world.gen.ModEntitySpawns;
 import net.fabricmc.api.ModInitializer;
@@ -20,5 +21,6 @@ public class EmotionalSuppourtDemons implements ModInitializer {
 		ModItems.registerItems();
 		FabricDefaultAttributeRegistry.register(ModEntities.DEMON, DemonEntity.createAttributes());
 		ModEntitySpawns.addEntitySpawns();
+		DataTypes.registerDataComponentTypes();
 	}
 }
