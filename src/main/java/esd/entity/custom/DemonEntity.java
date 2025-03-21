@@ -41,13 +41,15 @@ public class DemonEntity extends AnimalEntity implements Tameable{
     public int getSitTicks(){
         return this.sitTicks;
     }
+
     public final AnimationState sit = new AnimationState();
     public final AnimationState idle = new AnimationState();
     private int idleAnimationTimeout = 0;
+
     public DemonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0F);
-        
+
         List<String> types = List.of(
                 "",
                 "gay_",
