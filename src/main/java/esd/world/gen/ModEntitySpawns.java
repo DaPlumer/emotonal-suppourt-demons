@@ -11,7 +11,7 @@ import net.minecraft.world.Heightmap;
 public class ModEntitySpawns {
     public static void addEntitySpawns() {
         BiomeModifications.addSpawn(BiomeSelectors.all(),
-                SpawnGroup.CREATURE, ModEntities.DEMON, 300, 1, 10);
+                SpawnGroup.CREATURE, ModEntities.DEMON, 30, 1, 10);
         SpawnRestriction.register(
                 ModEntities.DEMON,
                 SpawnLocationTypes.ON_GROUND,
