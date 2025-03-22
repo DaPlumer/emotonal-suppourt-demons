@@ -141,6 +141,7 @@ public class DemonEntity extends AnimalEntity{
             sitTicks++;
             if (sitTicks == -20) this.sit.start(0);
         }
+        if(this.hasVehicle()){this.setPosition(this.getVehicle().getPos());}
     }
 
     @Override
@@ -187,7 +188,7 @@ public class DemonEntity extends AnimalEntity{
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason,
                                  @Nullable EntityData entityData) {
-        applyOrientation(types.get(random.nextInt(types.size())));
+        randomizeOrientation();
         return super.initialize(world, difficulty, spawnReason, entityData);
     }
 
@@ -196,4 +197,6 @@ public class DemonEntity extends AnimalEntity{
         super.initDataTracker(builder);
         builder.add(ORIENTATION, "_");
     }
+    public void randomizeOrientation(){
+        applyOrientation(types.get(random.nextInt(types.size())));}
 }
