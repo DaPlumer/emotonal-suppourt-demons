@@ -41,9 +41,6 @@ public class DemonEntity extends AnimalEntity{
     public int getSitTicks(){
         return this.sitTicks;
     }
-    private double startSittingX;
-    private double startSittingY;
-    private double startSittingZ;
     public final AnimationState sit = new AnimationState();
     public final AnimationState idle = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -135,9 +132,6 @@ public class DemonEntity extends AnimalEntity{
         if (random.nextInt(100) == 0 && sitTicks == 0 &! this.hasVehicle()) {
             this.sit.start(0);
             this.sitTicks = 20;
-            startSittingX = this.getX();
-            startSittingY = this.getY();
-            startSittingZ = this.getZ();
         }
         if (sitTicks > 0) {
             sitTicks--;
