@@ -1,0 +1,14 @@
+{
+  "crash": {
+    "subtitle": "sound.esd.crash",
+    "sounds": [
+      "esd:crash"
+    ]
+  },
+  "engine": {
+    "subtitle": "sound.esd.start_fall",
+    "sounds": [
+      "esd:start_fall"
+    ]
+  }
+}

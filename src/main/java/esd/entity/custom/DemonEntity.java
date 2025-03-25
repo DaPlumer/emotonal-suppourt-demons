@@ -1,10 +1,16 @@
 package esd.entity.custom;
+import esd.CustomSounds;
 import esd.entity.ModEntities;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -17,6 +23,9 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -31,16 +40,28 @@ public class DemonEntity extends AnimalEntity{
     private static final TrackedData<String> ORIENTATION =
             DataTracker.registerData(DemonEntity.class, TrackedDataHandlerRegistry.STRING);
     public String askOrientation(){
-        return Objects.requireNonNullElse(this.dataTracker.get(ORIENTATION), "_");
+        if(!types.contains(this.dataTracker.get(ORIENTATION))) this.randomizeOrientation();
+        return this.dataTracker.get(ORIENTATION);
     }
     public void applyOrientation(String orientation){
             this.dataTracker.set(ORIENTATION, orientation);
+    }
+
+    @Override
+    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
+        super.fall(heightDifference, onGround, state, landedPosition);
     }
 
     private int sitTicks = 0;
     public int getSitTicks(){
         return this.sitTicks;
     }
+
+    @Override
+    public int getSafeFallDistance() {
+        return (int) (super.getSafeFallDistance() * 2.75);
+    }
+
     public final AnimationState sit = new AnimationState();
     public final AnimationState idle = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -70,8 +91,8 @@ public class DemonEntity extends AnimalEntity{
 
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.CAKE), false));
-        this.goalSelector.add(4, new FollowMobGoal(this, 0.25D, 0.0F, 50.0F));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(4, new FollowMobGoal(this, 0.25D, 0.0F, 50.0F));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
         this.goalSelector.add(7, new LookAroundGoal(this));
     }
@@ -84,7 +105,8 @@ public class DemonEntity extends AnimalEntity{
 
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.01D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D);
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D)
+                .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 7.0D);
     }
 
 
@@ -105,16 +127,30 @@ public class DemonEntity extends AnimalEntity{
 
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
-
             updateSitTick();
-            if(this.hasVehicle()){
-                if(this.getVehicle() instanceof PlayerEntity player && player.isSneaking()){
-                    this.dismountVehicle();
-                }
-            }
         }
+        if(this.hasVehicle()){
+            this.getVehicle().updatePassengerPosition(this);
+        }
+        if(this.getVehicle() instanceof PlayerEntity player && player.isSneaking()){
+            this.dismountVehicle();
+        }
+        if(isFallFlying() && startFall){
+                startFall = false;
+                this.playSound(CustomSounds.START_FALL);
+
+        }
+        if(!isFallFlying()) startFall=true;
 
     }
+
+
+    @Override
+    protected @Nullable SoundEvent getHurtSound(DamageSource source) {
+        if(source.isOf(DamageTypes.FALL)) return CustomSounds.CRASH;
+        return super.getHurtSound(source);
+    }
+
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.isOf(Items.CAKE) && !Objects.equals(this.askOrientation(), "ace_")&& !Objects.equals(this.askOrientation(), "aero_");
@@ -141,9 +177,8 @@ public class DemonEntity extends AnimalEntity{
             sitTicks++;
             if (sitTicks == -20) this.sit.start(0);
         }
-        if(this.hasVehicle()){this.setPosition(this.getVehicle().getPos());}
     }
-
+    private static boolean startFall = true;
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         DemonEntity baby = ModEntities.DEMON.create(world);
@@ -155,16 +190,6 @@ public class DemonEntity extends AnimalEntity{
         }
         return baby;
     }
-
-    @Override
-    public boolean collidesWith(Entity other) {
-        if( super.collidesWith(other)){
-            this.startRiding(other,true);
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void move(MovementType movementType, Vec3d movement) {
         super.move(movementType, movement);

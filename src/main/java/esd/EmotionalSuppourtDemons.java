@@ -18,5 +18,6 @@ public class EmotionalSuppourtDemons implements ModInitializer {
 		ModEntities.registerEntities();
 		FabricDefaultAttributeRegistry.register(ModEntities.DEMON, DemonEntity.createAttributes());
 		ModEntitySpawns.addEntitySpawns();
+		CustomSounds.initialize();
 	}
 }
