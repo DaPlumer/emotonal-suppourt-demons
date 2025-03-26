@@ -129,8 +129,29 @@ public class DemonEntity extends AnimalEntity{
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource source) {
-        if(source.isOf(DamageTypes.FALL)) return CustomSounds.CRASH;
-        return super.getHurtSound(source);
+        if(source.isOf(DamageTypes.FALL)) {
+            this.getWorld().createExplosion(
+                    this,
+                    Explosion.createDamageSource(this.getWorld(), this),
+                    null,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    3.0F,
+                    false,
+                    World.ExplosionSourceType.NONE,
+                    true,
+                    ParticleTypes.EXPLOSION,
+                    ParticleTypes.EXPLOSION_EMITTER,
+                    CustomSounds.CRASH
+            );
+            return null;}
+        return CustomSounds.SQUEAK;
+    }
+
+    @Override
+    public void onLanding() {
+        super.onLanding();
     }
 
     @Override
