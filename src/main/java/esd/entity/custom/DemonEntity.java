@@ -47,11 +47,6 @@ public class DemonEntity extends AnimalEntity{
             this.dataTracker.set(ORIENTATION, orientation);
     }
 
-    @Override
-    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
-        super.fall(heightDifference, onGround, state, landedPosition);
-    }
-
     private int sitTicks = 0;
     public int getSitTicks(){
         return this.sitTicks;
