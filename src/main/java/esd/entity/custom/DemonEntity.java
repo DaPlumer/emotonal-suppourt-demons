@@ -116,29 +116,16 @@ public class DemonEntity extends AnimalEntity{
     @Override
     public void tick() {
         super.tick();
-        if(attackingPlayer != null){
-            attackingPlayer.kill();
-        }
-
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
-            updateSitTick();
+            this.updateSitTick();
         }
-        if(this.hasVehicle()){
-            this.getVehicle().updatePassengerPosition(this);
-        }
-        if(this.getVehicle() instanceof PlayerEntity player && player.isSneaking()){
-            this.dismountVehicle();
-        }
-        if(isFallFlying() && startFall){
-                startFall = false;
-                this.playSound(CustomSounds.START_FALL);
-
-        }
-        if(!isFallFlying()) startFall=true;
-
+        if(attackingPlayer != null) this.attackingPlayer.kill();
+        if(this.hasVehicle()) this.getVehicle().updatePassengerPosition(this);
+        if(this.getVehicle() instanceof PlayerEntity player && player.isSneaking()) this.dismountVehicle();
+        if(startFall & this.isFalling() &! this.isDead()) this.playSound(CustomSounds.START_FALL);
+        this.startFall = !this.isFalling();
     }
-
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource source) {
