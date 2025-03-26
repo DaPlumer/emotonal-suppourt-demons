@@ -5,10 +5,16 @@
       "esd:crash"
     ]
   },
-  "engine": {
+  "start_fall": {
     "subtitle": "sound.esd.start_fall",
     "sounds": [
       "esd:start_fall"
+    ]
+  },
+  "squeak": {
+    "subtitle": "sound.esd.squeak",
+    "sounds": [
+      "esd:squeak"
     ]
   }
 }

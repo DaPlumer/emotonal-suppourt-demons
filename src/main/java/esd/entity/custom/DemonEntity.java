@@ -1,5 +1,5 @@
 package esd.entity.custom;
-import esd.CustomSounds;
+import esd.util.CustomSounds;
 import esd.entity.ModEntities;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -94,7 +94,7 @@ public class DemonEntity extends AnimalEntity{
         builder.add(ORIENTATION, "_");
     }
 
-
+    @SuppressWarnings({"NullPointerException", "DataFlowIssue"})
     @Override
     public void tick() {
         super.tick();

@@ -2,6 +2,7 @@ package esd;
 
 import esd.entity.ModEntities;
 import esd.entity.custom.DemonEntity;
+import esd.util.CustomSounds;
 import esd.world.gen.ModEntitySpawns;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
