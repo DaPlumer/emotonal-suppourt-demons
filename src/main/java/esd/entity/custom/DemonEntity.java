@@ -146,7 +146,12 @@ public class DemonEntity extends AnimalEntity{
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.CAKE) && !Objects.equals(this.askOrientation(), "ace_") && !Objects.equals(this.askOrientation(), "aero_");
+        return stack.isOf(Items.CAKE);
+    }
+
+    @Override
+    public boolean canBreedWith(AnimalEntity other) {
+        return super.canBreedWith(other) &! Objects.equals(this.askOrientation(), "ace_") &! Objects.equals(this.askOrientation(), "aero_");
     }
 
     private void updateSitTick(){
