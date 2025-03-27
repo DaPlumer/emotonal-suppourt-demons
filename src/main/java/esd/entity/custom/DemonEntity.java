@@ -153,7 +153,10 @@ public class DemonEntity extends AnimalEntity{
 
     @Override
     public boolean canBreedWith(AnimalEntity other) {
-        return super.canBreedWith(other) &! Objects.equals(this.askOrientation(), "ace_") &! Objects.equals(this.askOrientation(), "aero_");
+        if(other instanceof DemonEntity otherDemon){
+            return super.canBreedWith(otherDemon) && this.romanticOrSexual() && otherDemon.romanticOrSexual();
+        }
+        return false;
     }
 
     private void updateSitTick(){
@@ -245,5 +248,8 @@ public class DemonEntity extends AnimalEntity{
     @Override
     protected @Nullable SoundEvent getDeathSound() {
         return CustomSounds.SQUEAK;
+    }
+    public boolean romanticOrSexual(){
+        return !(this.askOrientation() == "ace_" || this.askOrientation() == "aero_");
     }
 }
