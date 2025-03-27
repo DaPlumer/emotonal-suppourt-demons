@@ -22,7 +22,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -136,9 +135,7 @@ public class DemonEntity extends AnimalEntity{
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = 20;
             this.idle.start(this.age);
-        } else {
-            --this.idleAnimationTimeout;
-        }
+        } else this.idleAnimationTimeout--;
     }
 
     @Override
