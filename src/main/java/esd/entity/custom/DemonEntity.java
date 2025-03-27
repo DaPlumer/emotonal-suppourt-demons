@@ -63,8 +63,8 @@ public class DemonEntity extends AnimalEntity{
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.CAKE), false));
+        this.goalSelector.add(1, new AnimalMateGoal(this, 0.35D));
+        this.goalSelector.add(2, new TemptGoal(this, 0.5D, Ingredient.ofItems(Items.CAKE), false));
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(4, new FollowMobGoal(this, 0.25D, 0.0F, 50.0F));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
@@ -74,7 +74,7 @@ public class DemonEntity extends AnimalEntity{
     public static DefaultAttributeContainer.Builder createAttributes(){
         return  MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 7.5D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.01D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0D)
                 .add(EntityAttributes.GENERIC_SAFE_FALL_DISTANCE, 7.0D);
