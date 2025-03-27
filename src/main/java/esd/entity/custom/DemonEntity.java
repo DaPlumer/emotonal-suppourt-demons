@@ -53,9 +53,6 @@ public class DemonEntity extends AnimalEntity{
 
     public int getSitTicks(){ return this.sitTicks; }
 
-    @Override
-    public int getSafeFallDistance() {return 3;}
-
 
     public DemonEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
