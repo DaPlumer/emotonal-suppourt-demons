@@ -227,4 +227,8 @@ public class DemonEntity extends AnimalEntity{
         this.dataTracker.set(ORIENTATION, nbt.getString("Variant"));
     }
 
+    @Override
+    protected @Nullable SoundEvent getDeathSound() {
+        return CustomSounds.SQUEAK;
+    }
 }
