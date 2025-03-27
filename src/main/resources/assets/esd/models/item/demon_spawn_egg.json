@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "esd:item/emotional_suppourt_demon"
-  }
-}
