@@ -46,6 +46,7 @@ public class DemonEntity extends AnimalEntity{
     private int idleAnimationTimeout = 0;
     protected int sitTicks = 0;
     private boolean startFall = true;
+    private boolean sitting = false;
     public final AnimationState sit = new AnimationState();
     public final AnimationState idle = new AnimationState();
 
@@ -163,10 +164,8 @@ public class DemonEntity extends AnimalEntity{
         When the sitTicks value hits 0, it becomes a random number between -128 and -256.
         when sitTicks hits -20, it Starts the standing animation.
          */
-
-        if (random.nextInt(100) == 0 && sitTicks == 0 &! this.hasVehicle()) {
-            this.sit.start(0);
-            this.sitTicks = 20;
+        if (random.nextInt(255) == 0 && sitTicks == 0 &! this.hasVehicle()) {
+            this.startSitting();
         }
         if (sitTicks > 0) {
             sitTicks--;
@@ -176,6 +175,17 @@ public class DemonEntity extends AnimalEntity{
             sitTicks++;
             if (sitTicks == -20) this.sit.start(0);
         }
+        this.sitting = sitTicks == 0;
+    }
+
+    @SuppressWarnings("unused")
+    public boolean isSitting() {
+        return sitting;
+    }
+
+    public void startSitting(){
+        this.sit.start(0);
+        this.sitTicks = 20;
     }
 
     @Override
