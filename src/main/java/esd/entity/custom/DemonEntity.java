@@ -30,7 +30,6 @@ import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 public class DemonEntity extends AnimalEntity{
 
@@ -108,7 +107,7 @@ public class DemonEntity extends AnimalEntity{
     }
 
     private boolean isFalling(){
-        return !this.isOnGround() &! this.isSwimming();
+        return !this.isOnGround() &! this.isSwimming() &! this.hasVehicle() && this.getVelocity().lengthSquared() < .5;
     }
 
     @Override
@@ -129,7 +128,8 @@ public class DemonEntity extends AnimalEntity{
                     ParticleTypes.EXPLOSION_EMITTER,
                     CustomSounds.CRASH
             );
-            return null;}
+            return null;
+        }
         return CustomSounds.SQUEAK;
     }
 
@@ -142,7 +142,7 @@ public class DemonEntity extends AnimalEntity{
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if(source.isOf(DamageTypes.EXPLOSION) && source.getAttacker() instanceof DemonEntity) return false;
+        if(source.isOf(DamageTypes.EXPLOSION) && source.getAttacker() instanceof DemonEntity) return super.damage(source, 0);
         return super.damage(source, amount);
     }
 
@@ -182,7 +182,6 @@ public class DemonEntity extends AnimalEntity{
         this.sitting = sitTicks == 0;
     }
 
-    @SuppressWarnings("unused")
     public boolean isSitting() {
         return sitting;
     }
@@ -249,6 +248,7 @@ public class DemonEntity extends AnimalEntity{
     protected @Nullable SoundEvent getDeathSound() {
         return CustomSounds.SQUEAK;
     }
+    @SuppressWarnings("StringEquality")
     public boolean romanticOrSexual(){
         return !(this.askOrientation() == "ace_" || this.askOrientation() == "aero_");
     }
